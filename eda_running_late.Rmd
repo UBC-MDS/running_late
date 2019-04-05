@@ -1,0 +1,218 @@
+---
+title: "Exploratory Data Analysis (EDA)"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Running Late Survey Data
+
+Team Members  
+- Alycia Butterworth  
+- Sreya Guha  
+- Fan Nie  
+- Aaron Quinton  
+
+
+```{r, include=FALSE}
+library(tidyverse)
+library(GGally)
+library(ggbeeswarm)
+library(forecast)
+```
+
+
+```{r, include=FALSE}
+# Import and tidy the data
+
+df_raw <- read_csv("https://raw.github.ubc.ca/MDS-2018-19/survey-data/master/2019-04-03_Running_late_survey_data.csv?token=AAAGpiOpnJ3Km-R0FJ13bmOk0XaA9j-bks5csEJnwA%3D%3D")
+
+df_questions <- df_raw[1,] %>%
+  select(Q1:Q13) %>% 
+  gather(key = "Num", value = "Question") %>% 
+  mutate(short_q = c("consent", "commute_time", "percent_late", "min_late", 
+                     "transport", "campus", "sleep_type", "sleep_time", "work", 
+                     "clubs", "breakfast", "performance", "family"),
+         new_name = paste(Num, short_q, sep = ".")) %>% 
+  select(Num,new_name,short_q, Question)
+
+
+df_survey <- df_raw[-(1:2),] %>% 
+  select(ResponseId, Q1:Q13) %>% 
+  mutate_at(vars(Q1, Q3, Q5, Q6, Q7, Q9, Q10, Q11, Q12, Q13), factor) %>% 
+  mutate_at(vars(Q2, Q4, Q8), as.numeric) %>% 
+  filter(Q1 == "Yes I Consent")
+
+colnames(df_survey) <- c("ID", df_questions$new_name)
+
+```
+
+
+```{r, include=FALSE}
+# Wrangle the data
+df_survey <- df_survey %>% 
+  mutate(avg_late = case_when(
+          Q3.percent_late == "0%"      ~ 0,
+          Q3.percent_late == "1-20%"   ~ 0.1*Q4.min_late,
+          Q3.percent_late == "21-40%"  ~ 0.3*Q4.min_late,
+          Q3.percent_late == "41-60%"  ~ 0.5*Q4.min_late,
+          Q3.percent_late == "61-80%"  ~ 0.7*Q4.min_late,
+          Q3.percent_late == "81-100%" ~ 0.9*Q4.min_late)) %>% 
+  select(ID, avg_late, Q2.commute_time, Q5.transport:Q13.family) %>% 
+  filter(avg_late < 50)
+
+levels(df_survey$Q12.performance) <- c("Above Avg.", "Avg.", "Below Avg.", "N/A")
+
+```
+
+
+
+The goal of this analysis is to explore the running late survey data we collected from the MDS 2018-2019 Cohort and teaching team. Our question of interest is trying to understand if there is a relationship between commute time and the average late time students arrive for the first lecture. This analysis also aims to confirm our suspicions on several potential confounding variables.  
+  
+The survey data was collected by qualtrics and the raw data is displayed below. 
+
+
+```{r, echo=FALSE}
+head(df_raw)
+```
+
+As you can see the data is untidy. We have selected relevant columns, rows, and corrected the data types and column names. It is also important to note that the raw data considered two survey questions related to the response variable:  
+- During Blocks 1 through 6, what percentage of classes have you arrived late?   
+- If you answered a number greater than 0%, for the days you were late, what was the average time (in minutes) that you were late?  
+
+To prepare our data for analysis we multiplied the results of these two questions to estimate an overall score for our response variable - average lateness. The results of this data preparation is summarized below:
+
+```{r, echo=FALSE}
+glimpse(df_survey)
+
+summary(df_survey)
+```
+
+
+```{r plots, include=FALSE}
+
+plot1 <- df_survey %>% 
+  select(avg_late, Q2.commute_time, Q8.sleep_time) %>% 
+  gather(key = "Variable", value = "Values") %>% 
+  ggplot(aes(x = Values)) +
+    geom_histogram(bins = 8) +
+    facet_wrap(~Variable, scales = "free_x") +
+    labs(title = "Numerical Variable Histograms", 
+         x = NULL,
+         y = "Count")
+  
+
+plot2 <- df_survey %>% 
+  select(Q5.transport:Q13.family, -Q8.sleep_time) %>%  
+  gather(key = "Variable", value = "Values") %>% 
+  ggplot(aes(x = Values)) +
+    geom_bar() +
+    facet_wrap(~factor(Variable,levels = colnames(df_survey)[c(-1,-2,-3,-7)]),
+                       scales = 'free_x')+
+    labs(title = "Categorical Variable Counts", 
+         x = NULL,
+         y = "Count")
+
+
+plot3 <- df_survey %>% 
+  ggplot(aes(x = Q2.commute_time, y = avg_late)) +
+    geom_point() +
+    labs(title = "Does commute time affect average lateness?",
+         y = "Average Minutes Late",
+         x = "Commute Time (minutes)")
+
+
+plot4 <- df_survey %>% 
+  select(-ID, -Q2.commute_time, -Q8.sleep_time) %>% 
+  gather(-avg_late, key = "Variable", value = "Values") %>% 
+  ggplot(aes(x = Values, y = avg_late)) +
+    geom_quasirandom() +
+    facet_wrap(~factor(Variable,levels = colnames(df_survey)[c(-1,-2,-3,-7)]), scales = "free_x") +
+    labs(title = "Potential Confounding Variables",
+         y = "Average Minutes Late",
+         x = NULL)
+
+
+plot5 <- df_survey %>% 
+  ggplot(aes(x = avg_late, col = Q5.transport)) +
+    stat_ecdf() +
+    labs(title = "ECDF Plot with Q5 Responses as a Confounding Variable",
+         subtitle = "Q5. What method of transportation do you use most often?",
+         x = "Average Minutes Late",
+         y = "Cumulatve Probability")
+
+
+plot6 <- df_survey %>% 
+  ggplot(aes(x = avg_late, col = Q6.campus)) +
+    stat_ecdf() +
+    labs(title = "ECDF Plot with Q6 Responses as a Confounding Variable",
+         subtitle = "Q6. Do you live on or off campus?",
+         x = "Average Minutes Late",
+         y = "Cumulatve Probability")
+
+
+plot7 <- df_survey %>% 
+  ggplot(aes(x = avg_late, col = Q7.sleep_type)) +
+    stat_ecdf() +
+    labs(title = "ECDF Plot with Q7 Responses as a Confounding Variable",
+         subtitle = "Q7. Do you consider your self a Morning Person or Night Owl?",
+         x = "Average Minutes Late",
+         y = "Cumulatve Probability")
+
+
+plot8 <- df_survey %>% 
+  ggplot(aes(x = avg_late, col = Q11.breakfast)) +
+    stat_ecdf() +
+    labs(title = "ECDF Plot with Q11 Responses as a Confounding Variable",
+         subtitle = "Q11. Do you have breakfast/coffee at home, buy on campus, or neither?",
+         x = "Average Minutes Late",
+         y = "Cumulatve Probability")
+
+```
+
+First let's consider the distributions of the numerical variables. We see below that the majority of the students arrive to class on time and have a commute time less than 50 minutes. There is also a range of sleep schedules.   
+
+```{r, echo=FALSE}
+plot1
+```
+
+We have several categorical variables that potentially could be a confounding variable. The counts of these variables are visualized below.
+
+```{r, echo = FALSE}
+plot2
+
+```
+
+
+The main relationship we are exploring is that between the average lateness and the commute time. The scatter plot below highlights this relationship and immediately suggests that there is no obvious association.  
+
+```{r, echo = FALSE}
+plot3
+
+```
+
+
+A possible trend in the above plot could be hidden by confounding variables. To further identify the relationship between our response variable and the potential confounding variables, we have included the visual below. Certain categories stand out as variables that are associated with average lateness. These variables are the method of transportation, whether they live on campus, sleep type, and whether they eat breakfast on campus, or at home.  
+
+```{r, echo = FALSE}
+plot4
+```
+
+To better illustrate the possible associations between the response variable and the variables identified in the previous graph, we have included the empirical cumulative distribution (ECDF) plots on each variable/survey question. These plots suggest that method of transportation is not very significant. Where as living on Campus slightly improves your time to school, and whether you are a morning person or don't have breakfast/coffee at school greatly improves your time to school.
+
+```{r echo=FALSE}
+plot5
+plot6
+plot7
+plot8
+```
+
+
+
+
+
+
+
+
