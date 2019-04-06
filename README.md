@@ -15,8 +15,8 @@ The focus of this experiment is to investigate the relationship between commute 
 <br>
 <br>
 
-| Milestone | Version | files and links included|
+| Milestone | Version | files and links |
 |--------------|--------|------------------------|
-| [milestone 1](https://github.com/UBC-MDS/running_late/blob/master/milestone1.md) | [V1.0](https://github.com/UBC-MDS/running_late/releases/tag/v1.0) | Purposal|
-| milesone 2| [V2.0](https://github.com/UBC-MDS/running_late/releases/tag/v2.0) | [EDA](https://github.com/UBC-MDS/running_late/blob/master/eda_running_late.md),  [Survey](https://ubc.ca1.qualtrics.com/jfe/form/SV_3Jk3TZyscxiUZY9),  [Survey Raw Data](https://github.ubc.ca/MDS-2018-19/survey-data/blob/master/2019-04-03_Running_late_survey_data.csv)
+| milestone 1 | [V1.0](https://github.com/UBC-MDS/running_late/releases/tag/v1.0) | [Proposal](https://github.com/UBC-MDS/running_late/blob/master/doc/milestone1.md)|
+| milesone 2| [V2.0](https://github.com/UBC-MDS/running_late/releases/tag/v2.0) | [EDA](https://github.com/UBC-MDS/running_late/blob/master/doc/eda_running_late.md),  [Survey](https://ubc.ca1.qualtrics.com/jfe/form/SV_3Jk3TZyscxiUZY9),  [Survey Raw Data](https://github.ubc.ca/MDS-2018-19/survey-data/blob/master/2019-04-03_Running_late_survey_data.csv)
 

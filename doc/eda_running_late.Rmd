@@ -69,7 +69,7 @@ levels(df_survey$Q12.performance) <- c("Above Avg.", "Avg.", "Below Avg.", "N/A"
 
 
 
-The goal of this analysis is to explore the running late survey data we collected from the MDS 2018-2019 Cohort and teaching team. Our question of interest is trying to understand if there is a relationship between commute time and the average late time students arrive for the first lecture. This analysis also aims to confirm our suspicions on several potential confounding variables.  
+The goal of this analysis is to explore the running late survey data we collected from the MDS 2018-2019 Cohort and teaching team. We received a total of 54 responses. Our question of interest is trying to understand if there is a relationship between commute time and the average late time students arrive for the first lecture. This analysis also aims to confirm our suspicions on several potential confounding variables.  
   
 The survey data was collected by qualtrics and the raw data is displayed below. 
 
@@ -82,11 +82,33 @@ As you can see the data is untidy. We have selected relevant columns, rows, and 
 - During Blocks 1 through 6, what percentage of classes have you arrived late?   
 - If you answered a number greater than 0%, for the days you were late, what was the average time (in minutes) that you were late?  
 
-To prepare our data for analysis we multiplied the results of these two questions to estimate an overall score for our response variable - average lateness. The results of this data preparation is summarized below:
+To prepare our data for analysis we multiplied the results of these two questions to estimate an overall score for our response variable - average lateness. Below is our cleaned data and summary statistics.
+
+
+#### Data Variables:
+
+- `ave_late`: The multiplied value of percentage of classes the respondent arrived late by the average time in minutes that they were late
+- `Q2.commute_time`: The respondent's commute time to UBC in minutes (continuous variable)
+- `Q5.transport`: The respondent's most used method of transportation for commuting to school (categorical variable)
+- `Q6.campus`: Whether the respondent lives 'on campus' or 'off campus' (binary variable)
+- `Q7.sleep_type`: Does the respondent classify themselves as a 'morning person', 'night owl', or 'neither' (categorical variable)
+- `Q8.sleep_time`: How much sleep the respondent gets on an average night (continuous variable)
+- `Q9.work`: Does the respondent works part-time/full-time (binary variable)
+- `Q10.clubs`: Is the respondent a member of any clubs or extracurriculars (binary variable)
+- `Q11.breakfast`: Does the respondent eat/get breakfast/coffee in the morning 'at home', 'on campus', or 'neither' (categorical variable)
+- `Q12.performance`: How does the respondent perceive their performance in MDS (categorical variable)
+- `Q13.family`: Does the respondent live with a significant other, child(ren), and/or dog(s) (binary variable)
+
+
+#### Cleaned Data Preview:
 
 ```{r, echo=FALSE}
-glimpse(df_survey)
+knitr::kable(head(df_survey %>% select(-ID)))
+```
 
+#### Summary Statistics:
+
+```{r, echo=FALSE}
 summary(df_survey)
 ```
 
@@ -171,6 +193,8 @@ plot8 <- df_survey %>%
          y = "Cumulatve Probability")
 
 ```
+
+#### Data Visualization
 
 First let's consider the distributions of the numerical variables. We see below that the majority of the students arrive to class on time and have a commute time less than 50 minutes. There is also a range of sleep schedules.   
 
