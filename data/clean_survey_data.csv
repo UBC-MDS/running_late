@@ -1,0 +1,55 @@
+ID,avg_late,Q2.commute_time,Q5.transport,Q6.campus,Q7.sleep_type,Q8.sleep_time,Q9.work,Q10.clubs,Q11.breakfast,Q12.performance,Q13.family
+R_1jiEHR2vV8HXkTm,0.5,30,Public transit,Off Campus,Morning Person,8,No,No,At Home,Above Avg.,Yes
+R_2EGjAE2JI0D845w,0,25,Drive,Off Campus,Morning Person,7,No,No,At Home,Avg.,Yes
+R_ZfxVJz5igZhKSHv,0.1,10,Walk,On Campus,Morning Person,7,No,No,At Home,Avg.,Yes
+R_1Nfu7teJjeffbpu,0.5,25,Public transit,Off Campus,Neither,7,No,No,At Home,Above Avg.,No
+R_24dYbJt1IQ9o5dA,0,15,Walk,On Campus,Night Owl,7.5,No,No,On Campus,N/A,No
+R_1F2jfHmrinU4y2T,0.5,60,Public transit,Off Campus,Morning Person,8,No,Yes,At Home,Above Avg.,Yes
+R_1eReJOXbvqvglPx,3,15,Public transit,Off Campus,Night Owl,4,No,No,Neither,Above Avg.,No
+R_2bNM8w6g8mLOmyI,0,30,Drive,Off Campus,Morning Person,6,No,No,At Home,Avg.,No
+R_3p0fWB6ux7FXU5p,9,30,Public transit,Off Campus,Morning Person,7.5,No,No,At Home,Above Avg.,Yes
+R_338NP1aWgiVZdZv,0,25,Public transit,Off Campus,Morning Person,7,No,No,At Home,Above Avg.,No
+R_1N6ihz4ap1tefUl,9,40,Drive,Off Campus,Night Owl,5,Yes,Yes,On Campus,Avg.,Yes
+R_tMVcSy2my6DsqI1,14,50,Public transit,Off Campus,Neither,8.5,No,No,On Campus,N/A,Yes
+R_3JCmUYGnmeOOrIh,1,20,Public transit,Off Campus,Morning Person,8,No,No,At Home,Above Avg.,Yes
+R_322xRwMye7IbGVR,0.1,10,Walk,On Campus,Morning Person,8,No,No,At Home,Below Avg.,No
+R_3G0W7Qio7lleLP0,0.8999999999999999,15,Walk,On Campus,Morning Person,6.5,No,No,On Campus,Avg.,No
+R_3r0242UCUWHbjtU,0,20,Public transit,Off Campus,Morning Person,7.5,No,No,At Home,Above Avg.,No
+R_24l4LfoAHXMWqVm,0.5,45,Public transit,Off Campus,Morning Person,6,No,No,At Home,Above Avg.,Yes
+R_2Tu5X3S8bmNPCJM,6,20,Public transit,Off Campus,Neither,7,Yes,Yes,At Home,Avg.,No
+R_3KqEPygpvnUowYM,0.30000000000000004,30,Public transit,Off Campus,Neither,6.7,No,No,At Home,Avg.,No
+R_ApxIa1UloFaOnaF,27,35,Public transit,Off Campus,Night Owl,6.5,No,No,On Campus,Above Avg.,Yes
+R_1DLP1r3li6nZhBI,3.5,60,Public transit,Off Campus,Night Owl,6.5,No,No,At Home,Above Avg.,Yes
+R_1BVkEvUp3arT7n4,1.5,15,Bike,On Campus,Neither,7,No,Yes,At Home,Below Avg.,No
+R_2Tw9hPtMKXDuBFB,0,20,Public transit,Off Campus,Morning Person,6,No,No,On Campus,Above Avg.,No
+R_1M3Y5ROY3wo5P08,0.2,15,Walk,On Campus,Neither,7,No,No,On Campus,Above Avg.,No
+R_25EK25aOo5GtanX,7,10,Walk,On Campus,Neither,7,No,No,At Home,Above Avg.,No
+R_p6kr0bE9BXels9H,0.5,9,Walk,On Campus,Night Owl,7,Yes,No,At Home,Avg.,Yes
+R_24MCIZ0ziI4IQ2n,0.7000000000000001,15,Public transit,Off Campus,Morning Person,5,Yes,Yes,Neither,Above Avg.,Yes
+R_1MQA7Fh0Z0GMqvn,10.5,24,Public transit,Off Campus,Night Owl,6,No,Yes,At Home,Avg.,No
+R_2PdOsponUqZmms1,0,60,Drive,Off Campus,Morning Person,7,No,No,At Home,Above Avg.,Yes
+R_1dGkCMSt4gQQ3Uw,0.7000000000000001,60,Public transit,Off Campus,Night Owl,6.5,No,No,At Home,Avg.,Yes
+R_2wMLI32DfG2nvlZ,0.5,0,Walk,On Campus,Night Owl,6,No,No,On Campus,Avg.,No
+R_3RlmKmbS1EjMxsk,0.30000000000000004,60,Bike,Off Campus,Night Owl,6.75,No,No,On Campus,Avg.,Yes
+R_3hhmny7PjiaF4tA,0.5,15,Walk,On Campus,Morning Person,8,No,Yes,At Home,Above Avg.,No
+R_3FWpIkPZbfpEBQp,0,120,Public transit,Off Campus,Neither,4,Yes,No,At Home,Avg.,Yes
+R_2qBLipBjwv9sfbX,0,15,Public transit,Off Campus,Night Owl,8,No,No,On Campus,Above Avg.,No
+R_1lzoHuYREXKXw2r,4,22,Public transit,Off Campus,Neither,7.5,No,Yes,At Home,Avg.,No
+R_3DhFhAB7xtbp3KV,1,15,Walk,On Campus,Night Owl,5,No,No,At Home,Above Avg.,No
+R_2wn4GrSGV2ORc62,3,35,Public transit,Off Campus,Night Owl,7,No,No,On Campus,Above Avg.,No
+R_czPYOHacVsQ5EVr,0.5,30,Public transit,Off Campus,Neither,6,No,Yes,At Home,Avg.,No
+R_ULaL6zNNVzMkSw9,4.5,15,Walk,On Campus,Night Owl,6,No,Yes,At Home,Avg.,No
+R_1IciZHXQgxmpLne,0.5,15,Walk,On Campus,Night Owl,6,No,No,Neither,Avg.,No
+R_YbhqtLfWZgqo9gZ,0.30000000000000004,5,Walk,On Campus,Neither,8,No,Yes,At Home,Above Avg.,No
+R_2vcgEYSW3gednGZ,0,30,Public transit,Off Campus,Night Owl,5,Yes,Yes,At Home,N/A,No
+R_2Et2tRB8l7q9lPY,31.499999999999996,20,Walk,On Campus,Night Owl,5,No,No,At Home,Avg.,No
+R_1E5ywqepQxIXlid,0.5,15,Walk,On Campus,Night Owl,6,No,No,At Home,Avg.,No
+R_3jUMbW8Q9h3kpsF,2.7,10,Walk,On Campus,Night Owl,6,No,Yes,At Home,Avg.,No
+R_262u53FoywciPBn,1,35,Drive,Off Campus,Neither,6,No,No,At Home,Above Avg.,Yes
+R_1fkgPpMcrnM5iJU,0.5,20,Bike,Off Campus,Neither,8,No,Yes,At Home,Above Avg.,Yes
+R_BKFIU643aSCai3f,1,40,Public transit,Off Campus,Night Owl,5,No,No,Neither,Above Avg.,No
+R_2zqNfAxjjyDzIdG,0.5,60,Public transit,Off Campus,Morning Person,8,No,Yes,At Home,Avg.,No
+R_2c6MtytWazlVbId,1,40,Public transit,Off Campus,Night Owl,6,No,No,On Campus,Above Avg.,No
+R_SSFKhAdQlPnx8Nr,4.8999999999999995,12,Bike,Off Campus,Night Owl,8,No,Yes,At Home,Avg.,No
+R_3Pnl2qXMxRp0Wz0,0,90,Public transit,Off Campus,Morning Person,6.5,No,No,On Campus,Above Avg.,No
+R_1goxj8yo7anQnpq,5,40,Public transit,Off Campus,Neither,7.5,No,Yes,At Home,Above Avg.,No

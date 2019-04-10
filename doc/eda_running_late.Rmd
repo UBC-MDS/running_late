@@ -47,6 +47,8 @@ df_survey <- df_raw[-(1:2),] %>%
 
 colnames(df_survey) <- c("ID", df_questions$new_name)
 
+
+write_csv(df_survey, path = "../data/clean_survey_data.csv")
 ```
 
 
