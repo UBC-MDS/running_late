@@ -4,7 +4,31 @@ Analysis and Discussion
 Introduction
 ------------
 
-> To be filled in by Sreya
+When students come to class late, it can disrupt the flow of a lecture or discussion, distract other students, impede learning, and generally erode class morale. At its most extreme, teachers may have to start class 5-10 minutes late in order to account for late arrivals, which means that students will miss out on valuable instructional time on a daily basis. There are a number of possible reasons students arrive to class late. For example, going to bed late and waking up late next morning, an inherent anxiety level associated with attending school, etc. Inevitable circumstances along a student's way to school can also be one of the possible reasons why students are late to class. In some instances, a student may find it difficult to make it to class on time because of the physical distance between the student's home and school. This may be particularly true of students who live off-campus.
+
+Our analysis tries to answer the question : **Does the commute time to UBC of a MDS student influence their late arrival time to the first class?**
+
+Survey Design
+------------
+
+To address this question we surveyed students in the 2018-2019 MDS cohort to obtain data to conduct our analysis. We used the services provided by Qualtrics to make our survey. WE provided a consent form to disclose the potential risk of re-identification of the anonymous data when combining with application information in the MDS program. The survey can be found here: [Running late survey](https://ubc.ca1.qualtrics.com/jfe/form/SV_3Jk3TZyscxiUZY9). To make the survey easy and less time consuming, most of the questions were multiple choice. We also avoided asking questions that might be sensitive or have risk of involving in discrimination issues.
+
+To answer the question of interest we asked the following questions:
+
+1. What is your average commute time (in minutes) to the University of British Columbia?
+2. During Blocks 1 through 6, what percentage of classes have you arrived late?
+3. If you answered a number greater than 0%, for the days you were late, what was the average time (in minutes) that you were late?
+4. What method of transportation do you use most often?
+5. Do you live on or off campus?
+6. Do you consider your self a Morning Person or Night Owl?
+7. How much sleep (in hours) do you get on an average night?
+8. Do you work part time?
+9. Are you involved in any clubs or extracurriculars?
+10. Do you have breakfast/coffee at home, buy on campus, or neither?
+11. How well do you perceive your performance in this program?
+12. Do you live with a partner/family/dog?
+
+The first question provides information about the main predictor. Questions 2 and 3 serve as the response. The other questions like amount of sleep, method of transportation, etc. are related to the confounding variables.
 
 Methods and Analysis
 --------------------
@@ -36,13 +60,13 @@ df %>% glm(late ~ Q2.commute_time + Q6.campus + Q7.sleep_type + Q10.clubs + Q11.
     ## # A tibble: 8 x 5
     ##   term                   estimate std.error statistic p.value
     ##   <chr>                     <dbl>     <dbl>     <dbl>   <dbl>
-    ## 1 (Intercept)             -0.905     0.962     -0.941  0.347 
-    ## 2 Q2.commute_time         -0.0120    0.0180    -0.664  0.507 
-    ## 3 Q6.campusOn Campus      -0.940     0.820     -1.15   0.251 
-    ## 4 Q7.sleep_typeNeither     1.25      0.836      1.49   0.136 
+    ## 1 (Intercept)             -0.905     0.962     -0.941  0.347
+    ## 2 Q2.commute_time         -0.0120    0.0180    -0.664  0.507
+    ## 3 Q6.campusOn Campus      -0.940     0.820     -1.15   0.251
+    ## 4 Q7.sleep_typeNeither     1.25      0.836      1.49   0.136
     ## 5 Q7.sleep_typeNight Owl   1.95      0.807      2.42   0.0156
-    ## 6 Q10.clubsYes             0.614     0.708      0.867  0.386 
-    ## 7 Q11.breakfastNeither     0.944     1.29       0.734  0.463 
+    ## 6 Q10.clubsYes             0.614     0.708      0.867  0.386
+    ## 7 Q11.breakfastNeither     0.944     1.29       0.734  0.463
     ## 8 Q11.breakfastOn Campus  -0.0866    0.790     -0.110  0.913
 
 Focusing on our explanatory variable and sleep type (Removing Q6, Q10, Q11), we see there is still insufficient evidence to suggest commute time affects whether a student is late. It is interesting however to see that people who describe themselves as night owls are exp(1.79)=6 times more likely to arrive late than those who identify as a morning person.
@@ -54,9 +78,9 @@ df %>% glm(late ~ Q2.commute_time + Q7.sleep_type, family = "binomial", data = .
     ## # A tibble: 4 x 5
     ##   term                   estimate std.error statistic p.value
     ##   <chr>                     <dbl>     <dbl>     <dbl>   <dbl>
-    ## 1 (Intercept)            -1.12       0.708     -1.58   0.115 
-    ## 2 Q2.commute_time        -0.00429    0.0136    -0.315  0.753 
-    ## 3 Q7.sleep_typeNeither    1.25       0.780      1.60   0.109 
+    ## 1 (Intercept)            -1.12       0.708     -1.58   0.115
+    ## 2 Q2.commute_time        -0.00429    0.0136    -0.315  0.753
+    ## 3 Q7.sleep_typeNeither    1.25       0.780      1.60   0.109
     ## 4 Q7.sleep_typeNight Owl  1.79       0.723      2.48   0.0132
 
 ### Model 2: Of the students who arrive late, how does their commute time affect how late they arrive?
@@ -68,7 +92,7 @@ In the previous model we saw that there is no relationship between commute time 
 It is clear from the plot above that there is no significant relationship. This is confirmed by the linear model below.
 
 ``` r
-df %>% filter(late == "Yes") %>% 
+df %>% filter(late == "Yes") %>%
   lm(avg_late ~ Q2.commute_time, data = .) %>% tidy()
 ```
 
@@ -81,7 +105,7 @@ df %>% filter(late == "Yes") %>%
 Similar to Model 1, we need to consider the confounding variables. As detailed below we see that all of these variables have high p values. We can conclude that they are not confounding variables and our previous conclusion from the plot above holds.
 
 ``` r
-df %>% filter(late == "Yes") %>% 
+df %>% filter(late == "Yes") %>%
   lm(avg_late ~ Q2.commute_time + Q6.campus + Q7.sleep_type + Q10.clubs + Q11.breakfast, data = .) %>% tidy()
 ```
 
