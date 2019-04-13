@@ -23,14 +23,32 @@ To uncover the question of interest the following questions will be included in 
 
 To handle potential confounding variables the survey will include these additional questions:
 - What method of transportation do you use? - (transit, bike, walk, drive)
+Rationale : A student who uses public transit or drives to school may live off-campus and thus might have a longer commute time than students who walk or bike to school. This might effect their arrival time for the first class of the day.
+
 - Do you live on or off campus? - (On Campus, Off Campus)
-- Do you consider your self a Morning Person or Night Owl? - (Morning Person, Night Owl)
+Rationale : This variable is considered to determine whether living off campus causes students to reach class late.
+
+- Do you consider your self a Morning Person or Night Owl? - (Morning Person, Night Owl, Neither)
+Rationale : A Night Owl does most of his/her productive work after 9 p.m. This might cause him/her to be late to the first because they need to catch up on sleep in the morning.
+
 - How much sleep (in hours) do you get on an average night? - (numerical input)
+Rationale : The amount of sleep a student gets may affect his willingness to reach the first class on time. It might also be a concern if a student who does not get enough sleep also has to commute a long distance to school.
+
 - Do you work part time? (Yes, No)
+Rationale : Students working part time might be overworked/tired from working during school days and therefore might end up being
+late to class.
+
 - Are you involved in any clubs or extracurriculars? (Yes, No)
+Rationale : Being involved in clubs or other extracurricular activities
+
 - Do you have breakfast/coffee at home, buy on campus, or neither? (At Home, On Campus, Neither)
+Rationale : Preparing breakfast/coffee at home or purchasing it on campus might take up more of one's time causing students
+to be late to school.
+
 - How well do you perceive your performance in this program - (Below Average, Average, Above Average, Prefer not to Say)
+
 - Do you live with a partner/family/dog - (Yes, No)
+Rationale : Staying with loved ones might take up more of a student's time and thus affect his arrival time to class.
 
 ## Analysis
 
