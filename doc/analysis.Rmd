@@ -1,0 +1,130 @@
+---
+title: "Analysis and Discussion"
+output: github_document
+---
+
+```{r, include=FALSE}
+library(tidyverse)
+library(broom)
+```
+
+```{r, include=FALSE}
+df <- read_csv("../data/clean_survey_data.csv") %>% 
+  mutate(late = factor(if_else(avg_late > 0.5, "Yes", "No")))
+```
+
+## Introduction  
+> To be filled in by Sreya
+
+
+
+## Methods and Analysis
+
+The [exploratory data analysis](https://github.com/UBC-MDS/running_late/blob/master/doc/eda_running_late.md) (EDA) conducted in milestone 2 brought to light several considerations for our analysis. We saw that the distribution of our response variable -`average minutes late`- is zero inflated with 29 of the 54 students (~54%) having an average minutes late value of less than 0.5. To appropriately model this distribution we used a hurdle model. In this approach, the first model is the likelihood a student is late given their commute time. The second model only considers the students that arrived late or in other words the students that have surpassed the hurdle. It is important to note that these two models answer slightly different questions which is discussed in the following section. However, both questions pertain to our original question - What is the relationship between commute time and average minutes late? To highlight the distinction between observations that surpass the hurdle, we have illustrated the figure below.  
+  
+```{r, echo=FALSE}
+df  %>% 
+  ggplot(aes(y = avg_late, x = Q2.commute_time, col = late)) +
+    geom_point(alpha = 0.8, size = 2) +
+    labs(title = "Figure 1 - Hurdle Model Distinction",
+         x = "Commute Time to UBC (min)",
+         y = "Average Minutes Late",
+         col = "Late") +
+    theme_bw()
+```
+  
+To conduct this analysis we also need to consider confounding variables. In our original survey we gathered data on nine potential confounding variables. From our EDA we noticed some of the variables did not have sufficient observations across all levels. Additionally, the EDA also identified variables that had no apparent effect on our response variable. As such, we will focus our regression analysis and significance tests on four of the potential confounding variables. These variables are: `Q6.campus`,`Q7.sleep_type`,`Q10.clubs`,`Q11.breakfast`. For further details on each of these variables and this conclusion, please refer to our ([EDA document])https://github.com/UBC-MDS/running_late/blob/master/doc/eda_running_late.md).  
+
+### Model 1: Does commute time impact your odds of being late?  
+
+The odds of being late given a students commute time is visualized below. From this plot we see that both students who arrive on time or who arrive late have similar distributions.  
+  
+```{r, echo = FALSE}
+df %>% 
+  ggplot(aes(x = Q2.commute_time, fill = late)) +
+    geom_density(alpha = 0.5)+
+    labs(title = "Figure 2 - Commute Time Distributions",
+         x = "Commute Time to UBC (min)",
+         y = "Density",
+         col = "Late") +
+    theme_bw()
+```
+  
+We can more formally test our observations from the plot above by fitting a logistic regression model. As noted by the p value below, we can conclude that under the current model there is not sufficient evidence to suggest commute time affects whether a student is late. 
+
+```{r}
+a <- df %>% glm(late ~ Q2.commute_time, family = "binomial", data = .) %>% tidy()
+
+```
+
+Of course, this does not take into account potential confounding variables. It is possible other variables are hiding the relationship between commute time and average minutes late. To uncover if this is the case we have included the four confounding variables into our regression model. As detailed below, sleep type is the only significant confounding variable. 
+
+```{r}
+df %>% glm(late ~ Q2.commute_time + Q6.campus + Q7.sleep_type + Q10.clubs + Q11.breakfast, family = "binomial", data = .) %>% tidy()
+```
+
+Focusing on our explanatory variable and sleep type (Removing Q6, Q10, Q11), we see there is still insufficient evidence to suggest commute time affects whether a student is late. It is interesting however to see that people who describe themselves as night owls are $\exp(1.79) = 6$ times more likely to arrive late than those who identify as a morning person. 
+```{r}
+df %>% glm(late ~ Q2.commute_time + Q7.sleep_type, family = "binomial", data = .) %>% tidy()
+```
+
+### Model 2: Of the students who arrive late, how does their commute time affect how late they arrive?
+
+In the previous model we saw that there is no relationship between commute time and the odds of being late. This model attempts to further investigate the students who are late. The plot below illustrates this relationship (excluding confounding variables) and fits a linear model.  
+  
+```{r, echo=FALSE}
+df %>% 
+  filter(late == "Yes") %>% 
+  ggplot(aes(y = avg_late, x = Q2.commute_time)) +
+    geom_point() +
+    geom_smooth(method = 'lm', se = FALSE)+
+    labs(title = "Figure 3 - Model 2 Linear Regression",
+         x = "Commute Time to UBC (min)",
+         y = "Average Minutes Late") +
+    theme_bw()
+```
+
+It is clear from the plot above that there is no significant relationship. This is confirmed by the linear model below. 
+
+```{r}
+df %>% filter(late == "Yes") %>% 
+  lm(avg_late ~ Q2.commute_time, data = .) %>% tidy()
+```
+
+Similar to Model 1, we need to consider the confounding variables. As detailed below we see that all of these variables have high p values. We can conclude that they are not confounding variables and our previous conclusion from the plot above holds. 
+```{r}
+df %>% filter(late == "Yes") %>% 
+  lm(avg_late ~ Q2.commute_time + Q6.campus + Q7.sleep_type + Q10.clubs + Q11.breakfast, data = .) %>% tidy()
+```
+
+## Discussion and Study Design
+
+The overall objective of our study was to investigate the relationship of commute time and average minutes late to class. We conducted the survey on MDS students in the 2018-2019 cohort due to data availability, but we considered this a reasonable sample to infer on the UBC population. Given the nature of our data and research question, this experiment was conducted as a cross sectional observational study. As such, to infer causation it was crucial to account for all the confounders. We did so by developing a survey with many questions in hopes to gather information on several possible confounders. After performing EDA and regression analysis only the sleep type was considered a significant confounder in Model 1. Our final conclusion in both model 1 and model 2 supported the null hypothesis that there is no relationship between commute time and average minutes late to class.
+
+Do to our small sample size, we were unable to account for the confounding variables by stratification. This is because all the possible levels would result in groups that are too small and unstable for inference. Consequently, we modeled our variables in a regression analysis. This comes with the assumption of linearity. In future studies, it would be advisable to collect more data so that we can relax some assumptions and have more certainty around our conclusion. 
+
+Finally, it is important to address a word of caution in our studies generalizability. We do not have supporting evidence that the MDS Cohort is a reasonable sample of the entire student body at UBC. For instance, it could be argued that undergraduate students behaviours around arriving late to class differs dramatically from the graduate student population. This impacts the outreach of our conclusion that commute time does not affect average minutes late.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
