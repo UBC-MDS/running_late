@@ -84,7 +84,7 @@ To prepare our data for analysis we multiplied the results of these two question
     ##  On Campus:13    Below Avg.: 2               
     ##                  N/A       : 3               
     ##                                              
-    ## 
+    ##
 
 #### Data Visualization
 
@@ -107,3 +107,10 @@ A possible trend in the above plot could be hidden by confounding variables. To 
 To better illustrate the possible associations between the response variable and the variables identified in the previous graph, we have included the empirical cumulative distribution (ECDF) plots on each variable/survey question. These plots suggest that method of transportation is not very significant. Where as living on Campus slightly improves your time to school, and whether you are a morning person or don't have breakfast/coffee at school greatly improves your time to school.
 
 ![](eda_running_late_files/figure-markdown_github/unnamed-chunk-11-1.png)![](eda_running_late_files/figure-markdown_github/unnamed-chunk-11-2.png)![](eda_running_late_files/figure-markdown_github/unnamed-chunk-11-3.png)![](eda_running_late_files/figure-markdown_github/unnamed-chunk-11-4.png)
+
+### Next Steps:
+
+1. Analyse the effect of the confounder variables on the response variable and exclude the variables that we deem are not important in answering the question.
+
+2. Since the dependent variable is very zero inflated, further research regarding appropriate models to best represent our
+analysis will be done.
