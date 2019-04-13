@@ -15,7 +15,9 @@ Below is a brief introduction and overview to our project. For the detailed repo
 ### Introduction
 
 
-When students come to class late, it can disrupt the flow of a lecture or discussion, distract other students, impede learning, and generally erode class morale. At its most extreme, teachers may have to start class 5-10 minutes late in order to account for late arrivals, which means that students will miss out on valuable instructional time on a daily basis. The focus of this experiment is to investigate the relationship between commute time and late arrival time. In particular, a survey will be conducted on the 2018-2019 cohort of Masters of Data Science (MDS) students at the University of British Columbia (UBC). The goal is to address the specific question: **Does the commute time to UBC of an MDS student influence their arrival time to the first class?**. 
+When students come to class late, it can disrupt the flow of a lecture or discussion, distract other students, impede learning, and generally erode class morale. At its most extreme, teachers may have to start class 5-10 minutes late in order to account for late arrivals, which means that students will miss out on valuable instructional time on a daily basis. The focus of this experiment is to investigate the relationship between commute time and late arrival time. In particular, a survey will be conducted on the 2018-2019 cohort of Masters of Data Science (MDS) students at the University of British Columbia (UBC). 
+
+The goal is to address the specific question: **Does the commute time to UBC of an MDS student influence their arrival time to the first class?**
 
 - *Null Hypothesis:* Commute time to UBC does NOT impact an MDS student's late arrival time to class.
 - *Alternative Hypothesis:* Commute time to UBC does impact an MDS student's late arrival time to class.
@@ -54,7 +56,7 @@ The full analysis can be found in [doc/final_report.md](https://github.com/UBC-M
 
 ### Results
 
-In both model 1 and model 2, wee did not find sufficient evidence to reject the null hypothesis at a 95% confidence level. Therefore, we have accepted the null and have concluded that there is no relationship between commute time and average minutes late to class.
+In both model 1 and model 2, we did not find sufficient evidence to reject the null hypothesis at a 95% confidence level. Therefore, we have accepted the null and have concluded that there is no relationship between commute time and average minutes late to class.
 
 <br>
 <br>
@@ -64,7 +66,7 @@ In both model 1 and model 2, wee did not find sufficient evidence to reject the 
 |--------------|--------|------------------------|
 | milestone 1 | [V1.0](https://github.com/UBC-MDS/running_late/releases/tag/v1.0) | [Proposal](https://github.com/UBC-MDS/running_late/blob/master/doc/milestone1.md)|
 | milestone 2| [V2.0](https://github.com/UBC-MDS/running_late/releases/tag/v2.0) | [EDA](https://github.com/UBC-MDS/running_late/blob/master/doc/eda_running_late.md),  [Survey](https://ubc.ca1.qualtrics.com/jfe/form/SV_3Jk3TZyscxiUZY9),  [Survey Raw Data](https://github.ubc.ca/MDS-2018-19/survey-data/blob/master/2019-04-03_Running_late_survey_data.csv)
-| milestone 3 | [V3.0](https://github.com/UBC-MDS/running_late/releases/tag/v3.0) | [Final Analysis](https://github.com/UBC-MDS/running_late/blob/master/doc/final_report.md), [Peer Review](https://github.com/UBC-MDS/MDS_Block_Difficulty_Perception/issues/16) |
+| milestone 3 | [V3.0](https://github.com/UBC-MDS/running_late/releases/tag/v3.0) | [Final Report](https://github.com/UBC-MDS/running_late/blob/master/doc/final_report.md), [Peer Review](https://github.com/UBC-MDS/MDS_Block_Difficulty_Perception/issues/16) |
 
 ## Code of Conduct
 
